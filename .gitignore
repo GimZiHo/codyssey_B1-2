@@ -12,4 +12,3 @@ coverage/
 # 일회성 검증 결과. 유지할 테스트 소스는 추적한다.
 playwright-report/
 test-results/
-.verify-tmp/
