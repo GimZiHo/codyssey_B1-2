@@ -1,0 +1,179 @@
+# 작업 도구 환경
+
+여러 프로젝트의 PDF 확인과 브라우저 검증에 사용하는 도구를 사용자 전용 공통 경로에 설치한다. 프로젝트 자체의 실행 의존성은 각 프로젝트에서 관리한다.
+
+## 설치된 도구
+
+2026-09-24 이관 시 pypdf 패키지·의존성 검사, Playwright 설치 목록, Node.js와 정식 Chrome 버전 실행을 확인했다. 아래 Chromium 버전은 B1-1 기록이며 이번에는 설치 디렉터리 존재만 확인했다. 브라우저 페이지 실행·렌더링은 아직 검증하지 않았다.
+
+| 도구 | 버전 | 용도 |
+| --- | --- | --- |
+| pypdf | 6.18.0 | PDF 페이지와 텍스트 읽기 |
+| Playwright (Node.js) | 1.63.0 | 웹페이지 실행·DOM·스타일 검증과 화면 캡처 |
+| Chromium Headless Shell | 153.0.8010.12 (v1243) | Playwright 기본 브라우저 실행 |
+| Google Chrome (stable) | 153.0.8010.52 | 최신 정식 Chrome에서의 확인과 GUI 표시 |
+
+Python 환경 경로는 `~/.local/share/codex-tools/venv`이며, 설치 파일은 저장소에 포함하지 않는다. Python 도구 버전은 [tool-requirements.txt](../config/tool-requirements.txt)에 기록한다. 브라우저 도구의 경로와 버전은 아래 별도 항목에 정리한다.
+
+## 기존 설치 확인
+
+```bash
+~/.local/share/codex-tools/venv/bin/python -m pip show pypdf
+~/.local/share/codex-tools/venv/bin/python -m pip check
+```
+
+정상 동작하면 다시 설치하지 않는다. 다른 도구가 필요하면 먼저 `command -v <실행파일>`과 기존 환경을 확인한다.
+
+## 새 컴퓨터에서 설치 또는 환경 복구
+
+프로젝트 루트에서 Python 3의 `venv` 기능이 있는 환경으로 다음 명령을 실행한다. 기존 환경이 정상이라면 실행할 필요가 없다.
+
+```bash
+python3 -m venv ~/.local/share/codex-tools/venv
+~/.local/share/codex-tools/venv/bin/python -m pip install -r config/tool-requirements.txt
+```
+
+저장소 위치가 다르면 요구사항 파일 경로를 조정한다. 저장소를 복제하거나 pull하는 것만으로 도구가 설치되지는 않는다.
+
+## PDF 읽기
+
+과제 프로젝트의 루트에서 실행한다.
+
+```bash
+~/.local/share/codex-tools/venv/bin/python - <<'PY'
+from pypdf import PdfReader
+
+reader = PdfReader('docs/Requirement_B1-2.pdf')
+for number, page in enumerate(reader.pages, start=1):
+    print(f'--- {number}페이지 ---')
+    print(page.extract_text() or '')
+PY
+```
+
+이 명령은 텍스트 추출용이다. 스캔 이미지의 OCR이나 표·그림의 시각 확인은 별도 도구로 수행한다. 추가 도구가 필요해지면 기존 설치를 확인한 뒤 지속적인 설치 위치, 버전, 사용 방법을 이 문서에 기록한다.
+
+## 브라우저 검증 도구
+
+2026-09-13 Ubuntu 24.04 x86_64, Node.js 24.18.1에서 준비했다. 설치 경로는 `~/.local/share/codex-tools/browser`이다. 이 경로의 `package.json`과 `package-lock.json`에 Playwright 1.63.0을 고정했다. 프로젝트 소스에는 실행 의존성을 추가하지 않는다.
+
+- `node_modules/`: Playwright 패키지
+- `browsers/`: Chromium Headless Shell과 Playwright가 설치한 FFmpeg
+- `runtime-packages/`: Ubuntu 배포판과 Google 공식 경로에서 내려받은 패키지
+- `runtime/opt/google/chrome/chrome`: 정식 Google Chrome 실행 파일
+- `runtime/`: 위 패키지를 사용자 경로에 압축 해제한 내용
+- `fonts.conf`, `font-cache/`: 한글 글꼴 설정과 캐시
+
+시스템에 없던 패키지는 `apt-get download` 후 `dpkg-deb --extract`로 사용자 경로에 풀었다. 시스템 패키지는 변경하지 않았다.
+
+| 패키지 | 준비한 버전 |
+| --- | --- |
+| libnspr4 | 2:4.35-1.1build1 |
+| libnss3 | 2:3.98-1ubuntu0.2 |
+| libasound2t64 | 1.2.11-1ubuntu0.3 |
+| fonts-nanum | 20200506-1 |
+
+### 설치 상태 확인과 실행
+
+```bash
+npm list --prefix "$HOME/.local/share/codex-tools/browser" --depth=0
+```
+
+검증용 Node.js 스크립트는 다음 경로에서 Playwright를 불러온다.
+
+```js
+const { chromium } = require(require('node:path').join(require('node:os').homedir(), '.local/share/codex-tools/browser/node_modules/playwright'));
+```
+
+사용자 경로의 브라우저·라이브러리·글꼴을 지정해 스크립트를 실행한다. 마지막 스크립트 경로는 실제 검증 파일로 바꾼다.
+
+```bash
+PLAYWRIGHT_BROWSERS_PATH="$HOME/.local/share/codex-tools/browser/browsers" \
+LD_LIBRARY_PATH="$HOME/.local/share/codex-tools/browser/runtime/usr/lib/x86_64-linux-gnu" \
+FONTCONFIG_FILE="$HOME/.local/share/codex-tools/browser/fonts.conf" \
+node /path/to/browser-check.cjs
+```
+
+B1-2 검증 시나리오·화면 크기·스크립트는 구현 범위에 맞춰 정한다. B1-1의 검증 성공 결과는 B1-2의 검증 근거로 사용하지 않는다.
+
+### 정식 Google Chrome
+
+B1-1에서 준비한 stable 채널 실행 파일을 재사용할 수 있다. 2026-09-19에 `sudo` 권한 없이 Google 공식 배포 파일을 내려받아 시스템 변경 없이 압축만 해제했다.
+
+```bash
+codex_browser_tools="$HOME/.local/share/codex-tools/browser"
+cd "$codex_browser_tools/runtime-packages"
+curl -fsSL -o google-chrome-stable_current_amd64.deb \
+  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+dpkg-deb --extract google-chrome-stable_current_amd64.deb "$codex_browser_tools/runtime"
+```
+
+B1-1 준비 당시 필요한 공유 라이브러리는 충족했다. 실행 환경이 바뀌면 다시 확인한다. 실행 파일은 `runtime/opt/google/chrome/chrome`이며 버전은 다음으로 확인한다.
+
+```bash
+LD_LIBRARY_PATH="$HOME/.local/share/codex-tools/browser/runtime/usr/lib/x86_64-linux-gnu" \
+  "$HOME/.local/share/codex-tools/browser/runtime/opt/google/chrome/chrome" --version
+```
+
+setuid 샌드박스 바이너리는 root 소유가 아니어서 쓸 수 없으므로 `--no-sandbox`로 실행한다. 새 검증 스크립트에서 `CHROME_BIN`을 읽어 Playwright의 `executablePath`에 전달하도록 구성하면 다음 실행 예시를 사용할 수 있다. 환경변수만 지정한다고 Playwright가 자동으로 읽는 것은 아니다.
+
+```bash
+CHROME_BIN="$HOME/.local/share/codex-tools/browser/runtime/opt/google/chrome/chrome" \
+  node /path/to/browser-check.cjs
+```
+
+WSLg가 있는 환경에서는 `--headless` 없이 실행하면 창이 그대로 화면에 뜨므로 사람이 직접 보는 확인에도 쓸 수 있다. 이 환경의 Windows 쪽에도 정식 Chrome이 있으나, 리눅스의 Playwright가 직접 구동할 수 없어 자동 검증에는 위 실행 파일을 쓴다.
+
+### 새 환경에서 복구
+
+같은 Ubuntu 24.04 x86_64 환경에서 사용하는 절차다. 먼저 기존 설치를 확인한다.
+
+```bash
+codex_browser_tools="$HOME/.local/share/codex-tools/browser"
+npm install --prefix "$codex_browser_tools" --save-exact playwright@1.63.0
+PLAYWRIGHT_BROWSERS_PATH="$codex_browser_tools/browsers" \
+  "$codex_browser_tools/node_modules/.bin/playwright" install chromium --only-shell
+mkdir -p "$codex_browser_tools/runtime-packages" "$codex_browser_tools/runtime" "$codex_browser_tools/font-cache"
+cd "$codex_browser_tools/runtime-packages"
+apt-get download libnspr4 libnss3 libasound2t64 fonts-nanum
+for package in ./*.deb; do
+  dpkg-deb --extract "$package" "$codex_browser_tools/runtime"
+done
+```
+
+`apt-get download`는 해당 환경의 패키지 목록에 있는 버전을 받으므로 위 버전과 달라지면 설치 목록을 갱신한다. `fonts.conf`는 아래 내용으로 만들고 `/home/jiho` 부분을 자신의 홈 디렉터리로 바꾼다.
+
+```xml
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <include ignore_missing="yes">/etc/fonts/fonts.conf</include>
+  <dir>/home/jiho/.local/share/codex-tools/browser/runtime/usr/share/fonts/truetype/nanum</dir>
+  <cachedir>/home/jiho/.local/share/codex-tools/browser/font-cache</cachedir>
+</fontconfig>
+```
+
+## B1-2 프로젝트 개발 도구
+
+공통 도구(위 항목)와 구분되는 이 프로젝트 자체의 실행 의존성이다. `package.json`·`package-lock.json`에 고정하며 사용자 전용 공통 경로에 두지 않는다.
+
+| 도구 | 버전 | 확인일 |
+| --- | --- | --- |
+| React / react-dom | 19.3.0 | 2026-09-25 |
+| Vite | 8.3.1 | 2026-09-25 |
+| Node.js | 24.18.1 | 2026-09-25 |
+| npm | 11.16.0 | 2026-09-25 |
+
+```bash
+npm run dev       # 개발 서버
+npm run build     # 배포 빌드
+npm run lint      # ESLint 검사
+npm run preview   # 빌드 결과 로컬 미리보기
+```
+
+임시 검증 스크립트는 `.verify-tmp/browser-check.cjs`에 두며 버전 관리에는 포함하지 않는다.
+
+## Claude Code에서 반복 검증
+
+Claude Code는 이 문서의 해당 도구 실행법을 확인한 뒤 작업트리 안의 검증 스크립트를 실행한다. 실행 권한은 지침과 별도로 관리한다. 권한 설정은 사용자의 현재 도구 설정을 따르며 이 문서는 권한을 부여하거나 변경하지 않는다.
+
+권한 거부와 실행 환경 오류를 구분한다. Playwright 모듈을 찾지 못하면 `browser/node_modules/playwright` 경로를, `libnspr4.so` 로드 실패는 위 `LD_LIBRARY_PATH`를 확인한다. 정상 설치를 다시 설치하지 않는다. 검증 근거는 검토·보완·자료 반영까지 보존하고 인계가 끝난 뒤 일회성 파일을 정리한다.

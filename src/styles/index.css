@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #f5f5f4;
+  color: #1f2937;
+}
+
+.app-shell {
+  box-sizing: border-box;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.status-note {
+  color: #6b7280;
+}
