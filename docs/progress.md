@@ -9,7 +9,7 @@
 - **다음 작업 단위**: 공통 레이아웃과 페이지 라우팅. 원격 연동 전 데이터 모델과 접근 권한을 확정한다.
 - **그 다음**: 원격 CRUD 연동(Supabase).
 - **미정**: 데이터 모델 세부 사항·자료 본문 표시 및 이전 방식·원격 데이터 접근 권한. Supabase·Vercel 계정 및 프로젝트 연결 상태는 아직 확인하지 않았다.
-- **자료 반영 대기**: 없음. [001-entry-point-rendering.md](learning/001-entry-point-rendering.md) 반영 완료.
+- **자료 반영 대기**: 없음. [001-entry-point-rendering.md](learning/001-entry-point-rendering.md), [000-project-environment.md](learning/000-project-environment.md) 반영 완료.
 - **학습자 설명 확인**: 미확인. [학습 확인](#학습-확인) 항목은 구현 완료와 별개로, 실제 설명 가능 여부를 확인한 뒤 별도로 기록한다.
 - **Git**: main 초기화 완료. 환경 구성 단위의 추적 범위는 신규 소스·설정·학습자료와 이번에 갱신한 운영·진행·도구 문서다. 이전부터 추적되지 않은 과제 PDF·분석·이관 문서와 변경하지 않은 지침은 원본을 보존하며 이번 커밋에서 제외한다.
 - **검증 범위**: 프로젝트 환경 구성 단계에서 lint·build 각 1건, 브라우저 render·HMR 시나리오 각 1건(총 4건) 통과, 기능 검증 실패 0건, 브라우저 콘솔 오류 0건. 실제 배포·preview 브라우저 검증은 미수행.
