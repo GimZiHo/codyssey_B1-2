@@ -10,6 +10,7 @@
 | docs/learning/GUIDE.md | 작성·검증 근거 활용 기준을 계승하고 기술별 설명 기준을 조정한다. |
 | docs/tool-environment.md·config/tool-requirements.txt | 필요한 도구의 경로·사용법·복구법을 계승한다. 과거 검증 결과와 현재 설치 확인을 구분한다. |
 | docs/project-handoff.md | 이 절차를 계승하고 아래 기준 기록을 새 출처로 교체한다. |
+| docs/learning/concepts.md | 기존에 다룬 개념·범위·근거 링크를 계승하고 상대경로를 새 프로젝트 기준으로 확인한다. 이해 완료나 새 프로젝트 적용 완료로 바꾸지 않는다. |
 | docs/progress.md | 구조만 참고해 새 요구사항·미완료 체크리스트·현재 상태를 작성한다. |
 | .gitignore | 새 기술과 산출물에 맞춰 작성한다. 테스트 디렉터리 전체 제외를 자동 계승하지 않는다. |
 
