@@ -10,3 +10,4 @@
 | 003 | Node.js는 브라우저 밖에서 JavaScript를 실행해 개발 도구를 돌린다 | Vite 실행 환경과 이용자 브라우저 구분, 기존 설치 확인 범위(설명, 미구현) | [003-nodejs-role.md](003-nodejs-role.md) |
 | 004 | npm은 프로젝트가 쓰는 패키지를 설치하고 기록한다 | 패키지 관리 필요성, 수동 방식·대안 비교와 npm 선택 근거, `npm install` 역할과 향후 실행 순서(설명, 미구현) | [004-npm-role.md](004-npm-role.md) |
 | 005 | package.json은 프로젝트의 의존성과 실행 명령을 기록한다 | 파일의 역할과 주요 필드, 직접 작성·`npm init` 방법 비교, scripts 역할과 향후 작업 순서(설명, 미구현) | [005-package-json-role.md](005-package-json-role.md) |
+| 006 | package-lock.json은 실제 설치된 의존성 트리를 고정해 공유한다 | package.json과의 차이, 생성·갱신 시점과 Git 공유, 잠금 없는 방식·대안 비교, 재현성 조건과 한계(설명, 미구현) | [006-package-lock-json-role.md](006-package-lock-json-role.md) |

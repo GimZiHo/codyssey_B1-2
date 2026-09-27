@@ -5,11 +5,11 @@
 ## 현재 상태
 
 - **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영.
-- **진행 중**: 정규 단계 04(package.json) 완료, 05(package-lock.json) 대기. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가했으며 자료 목록에 연결했다. 정규 작업은 기존 단계 순서로 이어간다.
-- **다음 작업**: [005 — package.json의 역할](learning/005-package-json-role.md)에 이어 정규 단계 05 — package-lock.json을 진행한다. 설치 버전을 기록할 파일의 역할을 별도 학습자료로 작성하고 자료 목록에 연결한다. 설명 단계이므로 설치·소스 변경은 하지 않는다.
+- **진행 중**: 정규 단계 05(package-lock.json) 완료, 06(node_modules) 대기. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가했으며 자료 목록에 연결했다. 정규 작업은 기존 단계 순서로 이어간다.
+- **다음 작업**: [006 — package-lock.json의 역할](learning/006-package-lock-json-role.md)에 이어 정규 단계 06 — node_modules를 진행한다. 설치된 패키지를 두는 경로와 버전 관리 제외 이유를 별도 학습자료로 작성하고 자료 목록에 연결한다. 설명 단계이므로 설치·소스 변경은 하지 않는다.
 - **진행 방식**: 대화 한 번에 아래 단계 하나를 진행한다. 다음 진행 요청에서 이어가고 질문이면 현재 단계에 머문다. 이미 다룬 개념을 별도로 기록하거나 조회하지 않는다.
 - **미정**: 데이터 모델 세부 사항·자료 본문 표시 및 이전 방식·원격 데이터 접근 권한. Supabase·Vercel 계정 및 프로젝트 연결 상태는 아직 확인하지 않았다.
-- **자료 반영 대기**: 없음. package.json 학습자료와 자료 목록 링크를 반영했다.
+- **자료 반영 대기**: 없음. package-lock.json 학습자료와 자료 목록 링크를 반영했다.
 - **Git**: main과 기존 커밋 이력은 유지한다. 환경 구성 변경은 삭제·복원 커밋으로 되돌린다. 기존 미추적 과제·지침 파일은 보존한다.
 - **검증 범위**: 로컬 `index.html`을 브라우저로 직접 열어 탭 제목·언어·문자 인코딩·화면 제목 실제 표시·오류 없음의 5개 항목 통과, 실패 0건. 이전 React 환경 검증은 현재 구현의 근거로 사용하지 않는다.
 - **마지막 갱신**: 2026-09-27
@@ -57,7 +57,7 @@
 | 02 | 완료 | 설명 | Node.js | 개발 도구 실행 환경의 역할과 기존 방식·대안을 [학습자료](learning/003-nodejs-role.md)로 작성하고 목록에 연결했다. 2026-09-26 `command -v node`, `node --version`으로 기존 설치 경로와 `v24.18.1` 확인. 링크 대상 5건 통과, 실패 0건. 설치·소스 변경 없음. Vite 실행·빌드 검증은 08 단계에서 수행한다. |
 | 03 | 완료 | 설명 | npm | 프로젝트 패키지 관리의 필요성·대안·설치 명령의 역할을 [학습자료](learning/004-npm-role.md)로 작성하고 목록에 연결했다. 기존 npm 경로와 `11.16.0` 확인. 로컬 링크 대상 8건 통과, 실패 0건. 설치·소스 변경·실행 검증 없음. 명령 예시는 미실행으로 표시했다. 근거: [npm 소개](https://docs.npmjs.com/about-npm), [npm install](https://docs.npmjs.com/cli/v11/commands/npm-install), [Vite 시작하기](https://vite.dev/guide/). |
 | 04 | 완료 | 설명 | package.json | 프로젝트 의존성과 실행 명령을 기록할 파일의 역할·작성 방법을 [학습자료](learning/005-package-json-role.md)로 작성하고 목록에 연결했다. 로컬 링크 대상 4건 통과, 실패 0건. 설치·설정 생성·실행 검증 없음. 예시는 미실행으로 표시했다. 근거: [npm package.json](https://docs.npmjs.com/cli/v11/configuring-npm/package-json), [npm init](https://docs.npmjs.com/cli/v11/commands/npm-init). 실제 생성 방법·private 사용 여부·Vite 의존성 분류는 08 단계에서 결정한다. |
-| 05 | 대기 | 설명 | package-lock.json | 설치 버전을 기록할 파일의 역할을 설명한다. |
+| 05 | 완료 | 설명 | package-lock.json | 설치 버전을 기록할 파일의 역할·package.json과의 차이·공유 및 재설치 방식을 [학습자료](learning/006-package-lock-json-role.md)로 작성하고 목록에 연결했다. 로컬 링크 대상 14건 통과, 실패 0건(자료 목록 포함). 설치·설정 생성·실행 검증 없음. 명령·JSON은 미실행 예시로 표시했다. 근거: [npm package-lock.json](https://docs.npmjs.com/cli/v11/configuring-npm/package-lock-json), [npm ci](https://docs.npmjs.com/cli/v11/commands/npm-ci), [npm install](https://docs.npmjs.com/cli/v11/commands/npm-install). |
 | 06 | 대기 | 설명 | node_modules | 설치된 패키지를 두는 경로와 버전 관리 제외 이유를 설명한다. |
 | 07 | 대기 | 설명 | Vite | 선택한 개발·빌드 도구의 필요성과 기존 화면 실행 방식의 차이를 설명한다. |
 | 08 | 대기 | 변경 | 없음 | 필요한 Node.js·npm 버전을 확인하고 최소 패키지 환경과 Vite 실행 명령을 구성한다. 주요 생성 파일은 앞 단계 범위에 한정하고 React 템플릿 전체를 일괄 도입하지 않는다. 기존 HTML 화면이 개발 서버에서 표시되는지 확인한다. |
