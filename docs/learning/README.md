@@ -13,3 +13,4 @@
 | 006 | package-lock.json은 실제 설치된 의존성 트리를 고정해 공유한다 | package.json과의 차이, 생성·갱신 시점과 Git 공유, 잠금 없는 방식·대안 비교, 재현성 조건과 한계(설명, 미구현) | [006-package-lock-json-role.md](006-package-lock-json-role.md) |
 | 007 | node_modules는 로컬 설치한 패키지의 실제 파일을 두는 결과물 폴더다 | 설치 경로와 `.bin`, package.json·package-lock.json과의 역할 차이, Git 제외·커밋 대안 비교와 재설치 흐름(설명, 미구현) | [007-node-modules-role.md](007-node-modules-role.md) |
 | 008 | Vite는 개발 서버와 배포 빌드를 맡는 도구다 | `index.html` 직접 실행과의 차이, B1-1 방식 지속 가능 여부, 대안 비교와 Vite 선택 근거, 미실행 설치·scripts 예시와 08~13단계 순서(설명, 미구현) | [008-vite-role.md](008-vite-role.md) |
+| 009 | 최소 npm·Vite 환경으로 기존 HTML을 개발 서버에 띄운다 | 버전 확인, `package.json` 직접 작성과 `npm install --save-dev vite`, 생성·변경 파일, 설치 수와 잠금 파일 항목 차이, 대안 비교, `npm run dev` 실행·종료와 검증 결과 | [009-minimal-vite-setup.md](009-minimal-vite-setup.md) |

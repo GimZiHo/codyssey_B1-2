@@ -4,14 +4,14 @@
 
 ## 현재 상태
 
-- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영.
-- **진행 중**: 정규 단계 07(Vite) 완료, 08(최소 npm·Vite 환경 구성) 대기. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가했으며 자료 목록에 연결했다. 정규 작업은 기존 단계 순서로 이어간다.
-- **다음 작업**: [008 — Vite의 역할](learning/008-vite-role.md)에 이어 정규 단계 08 — 최소 npm·Vite 환경 구성을 진행한다. 기존 Node.js·npm 버전과 호환성을 확인하고 필요한 패키지 환경·실행 명령을 구성한 뒤 기존 HTML 화면의 개발 서버 표시를 검증한다. React 템플릿은 일괄 도입하지 않는다.
+- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영.
+- **진행 중**: 정규 단계 08(최소 npm·Vite 환경 구성) 완료, 09(JavaScript 모듈) 설명 대기. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가했으며 자료 목록에 연결했다. 정규 작업은 기존 단계 순서로 이어간다.
+- **다음 작업**: [009 — 최소 npm·Vite 환경 구성](learning/009-minimal-vite-setup.md)에 이어 정규 단계 09 — JavaScript 모듈 설명을 진행한다. React 진입 파일에서 사용할 import/export의 역할을 학습자료로 작성하며 설치·소스 변경은 하지 않는다.
 - **진행 방식**: 대화 한 번에 아래 단계 하나를 진행한다. 다음 진행 요청에서 이어가고 질문이면 현재 단계에 머문다. 이미 다룬 개념을 별도로 기록하거나 조회하지 않는다.
 - **미정**: 데이터 모델 세부 사항·자료 본문 표시 및 이전 방식·원격 데이터 접근 권한. Supabase·Vercel 계정 및 프로젝트 연결 상태는 아직 확인하지 않았다.
-- **자료 반영 대기**: 없음. Vite 학습자료와 자료 목록 링크를 반영했다.
+- **자료 반영 대기**: 없음. 최소 npm·Vite 환경 구성 학습자료와 자료 목록 링크를 반영했다.
 - **Git**: main과 기존 커밋 이력은 유지한다. 환경 구성 변경은 삭제·복원 커밋으로 되돌린다. 기존 미추적 과제·지침 파일은 보존한다.
-- **검증 범위**: 로컬 `index.html`을 브라우저로 직접 열어 탭 제목·언어·문자 인코딩·화면 제목 실제 표시·오류 없음의 5개 항목 통과, 실패 0건. 이전 React 환경 검증은 현재 구현의 근거로 사용하지 않는다.
+- **검증 범위**: `npm run dev`로 띄운 Vite 개발 서버에서 기존 `index.html`의 HTTP 응답·탭 제목·언어·문자 인코딩·화면 제목 실제 표시·오류 없음·서버 종료의 7개 항목 통과, 실패 0건. 그 전에는 로컬 파일 직접 열기로 5개 항목을 확인했다. 이전 React 환경 검증은 현재 구현의 근거로 사용하지 않는다.
 - **마지막 갱신**: 2026-09-27
 
 ## 서비스 주제와 자료 범위
@@ -26,12 +26,12 @@
 
 ## 기술 구성 — 2026-09-25 선택
 
-기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 제목 한 줄의 `index.html`만 있고 `package.json`을 포함한 Vite·npm은 아직 도입하지 않았다. 아래 설명 단계를 거친 뒤 필요한 파일과 도구를 도입한다. 계정 생성·원격 연동·배포는 수행하지 않았다.
+기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 제목 한 줄의 `index.html`과 08 단계에서 도입한 `package.json`·`package-lock.json`(Vite `8.3.1`, `devDependencies`)이 있다. React·빌드 스크립트·Vite 설정은 아직 도입하지 않았으며 설명 단계를 거친 뒤 필요한 파일과 도구를 도입한다. 계정 생성·원격 연동·배포는 수행하지 않았다.
 
 | 역할 | 선택 | 선택 이유 |
 | --- | --- | --- |
 | UI·언어 | React 18 이상, JavaScript와 JSX | B1-1의 JavaScript 경험을 이어가며 컴포넌트·상태 학습에 집중한다. |
-| 개발·빌드 | Vite, npm | 필요한 개념별 설명 후 최소 설정으로 개발 서버와 배포 빌드를 구성한다. 아직 미도입. |
+| 개발·빌드 | Vite, npm | 필요한 개념별 설명 후 최소 설정으로 개발 서버와 배포 빌드를 구성한다. 개발 서버(`npm run dev`)까지 도입, 빌드는 미구성. |
 | 라우팅 | React Router의 Declarative 모드 | BrowserRouter·Routes·Route로 URL과 페이지의 관계를 명시하고 데이터 요청은 훅에서 학습한다. |
 | 스타일 | 일반 CSS | 기존 CSS 경험을 재사용한다. |
 | 원격 데이터 | Supabase, @supabase/supabase-js | 학습 기록 하나를 테이블의 행으로 관리하고 JavaScript에서 CRUD를 호출한다. |
@@ -39,7 +39,7 @@
 | 소스 관리 | Git, GitHub | 로컬에서 검토한 작업 단위로 커밋하고, 사용자 요청 시 푸시한다. |
 
 - **소스 경로**: `src/pages`, `src/components`, `src/hooks`, `src/lib`, `src/styles`. 환경 구성 단계에 필요한 경로부터 만들고 역할에 따라 확장한다.
-- **버전 관리**: 2026-09-25 실행 확인 결과 Node.js `v24.18.1`, npm `11.16.0`, Git `2.43.0`, Claude Code `2.1.270`. 현재 Node.js는 Vite 공식 문서의 요구 범위를 충족한다. 패키지의 정확한 버전은 설치 시 호환성을 확인하고 `package-lock.json`에 기록한다.
+- **버전 관리**: 2026-09-25 실행 확인 결과 Node.js `v24.18.1`, npm `11.16.0`, Git `2.43.0`, Claude Code `2.1.270`. 현재 Node.js는 Vite 공식 문서의 요구 범위를 충족한다. 2026-09-27 재확인 후 Vite `8.3.1`(요구 Node.js `^20.19.0 || >=22.12.0`)을 설치해 `package-lock.json`에 기록했다. 이후 패키지도 설치 시 호환성을 확인하고 잠금 파일에 기록한다.
 - **원격 연동 경계**: 브라우저에는 Supabase URL과 publishable key만 사용한다. secret/service_role 키는 넣지 않는다. 환경변수만으로 데이터 접근을 제한할 수 없으므로 실제 학습자료 이전 전 읽기·쓰기 정책과 RLS를 확정한다. 인증 채택 여부는 이 단계에서 변경하지 않는다.
 - **확인 근거**: [Vite 시작하기](https://vite.dev/guide/), [React Router Declarative 설치](https://reactrouter.com/start/declarative/installation), [Supabase React 연동](https://supabase.com/docs/guides/getting-started/quickstarts/reactjs), [Supabase API 키](https://supabase.com/docs/guides/getting-started/api-keys), [Vercel의 Vite 배포](https://vercel.com/docs/frameworks/frontend/vite). 2026-09-25 공식 문서 확인. 실행·빌드·원격 CRUD 검증은 환경 구성 및 구현 단계에서 수행한다.
 
@@ -60,7 +60,7 @@
 | 05 | 완료 | 설명 | package-lock.json | 설치 버전을 기록할 파일의 역할·package.json과의 차이·공유 및 재설치 방식을 [학습자료](learning/006-package-lock-json-role.md)로 작성하고 목록에 연결했다. 로컬 링크 대상 14건 통과, 실패 0건(자료 목록 포함). 설치·설정 생성·실행 검증 없음. 명령·JSON은 미실행 예시로 표시했다. 근거: [npm package-lock.json](https://docs.npmjs.com/cli/v11/configuring-npm/package-lock-json), [npm ci](https://docs.npmjs.com/cli/v11/commands/npm-ci), [npm install](https://docs.npmjs.com/cli/v11/commands/npm-install). |
 | 06 | 완료 | 설명 | node_modules | 설치된 패키지 경로·버전 관리 제외 이유·재설치 흐름을 [학습자료](learning/007-node-modules-role.md)로 작성하고 목록에 연결했다. 자료와 목록의 로컬 링크 19건 통과, 실패 0건. 설치·설정 변경·실행 검증 없음. 기존 `.gitignore`의 `node_modules/` 설정은 유지하며 실제 설치 후 제외 적용과 `.bin` 연결 확인은 08 단계에 남겼다. 근거: [npm folders](https://docs.npmjs.com/cli/v11/configuring-npm/folders/), [npm ci](https://docs.npmjs.com/cli/v11/commands/npm-ci/). |
 | 07 | 완료 | 설명 | Vite | 선택한 개발·빌드 도구의 필요성·대안·기존 화면 실행 방식과의 차이를 [학습자료](learning/008-vite-role.md)로 작성하고 목록에 연결했다. 자료와 목록의 로컬 링크 21건 통과, 실패 0건. 설치·소스 변경·실행 검증 없음. 명령과 생성 파일은 미실행 예시로 구분했으며 실제 버전 호환성·패키지 생성 방법·실행 명령 구성은 08 단계에서 확인한다. 근거: [Vite 시작하기](https://vite.dev/guide/), [React 앱을 처음부터 만들기](https://react.dev/learn/build-a-react-app-from-scratch). |
-| 08 | 대기 | 변경 | 없음 | 필요한 Node.js·npm 버전을 확인하고 최소 패키지 환경과 Vite 실행 명령을 구성한다. 주요 생성 파일은 앞 단계 범위에 한정하고 React 템플릿 전체를 일괄 도입하지 않는다. 기존 HTML 화면이 개발 서버에서 표시되는지 확인한다. |
+| 08 | 완료 | 변경 | 없음 | Node.js `v24.18.1`·npm `11.16.0`이 Vite 8.3.1 요구 범위를 충족함을 확인했다. `package.json`을 직접 작성(`private: true`, `scripts.dev: vite`, `name`·`version` 생략)하고 `npm install --save-dev vite`로 설치(15개, audit 0건)해 `package-lock.json`(lockfileVersion 3, 선택 의존성 포함 41항목)을 생성했다. 기존 `.gitignore`의 `node_modules/` 제외와 `.bin/vite` 연결 확인. `index.html` 변경 없음. `npm run dev` 개발 서버에서 HTTP 응답·제목·언어·인코딩·h1 계산 스타일과 박스·오류 없음·서버 종료 7건 통과, 실패 0건. React·빌드·설정 파일 미도입. [학습자료](learning/009-minimal-vite-setup.md) 작성·목록 연결. |
 | 09 | 대기 | 설명 | JavaScript 모듈 | React 진입 파일에서 사용할 import/export의 역할을 설명한다. |
 | 10 | 대기 | 변경 | React 루트 | React 18 이상과 DOM 연결에 필요한 패키지를 도입하고 현재 제목을 React 루트에서 표시한다. 아직 JSX·컴포넌트 분리·state를 함께 도입하지 않는다. |
 | 11 | 대기 | 설명 | Vite 설정 파일 | JSX 변환에 필요한 설정을 둘 위치와 기본 설정을 유지할 범위를 설명한다. |
