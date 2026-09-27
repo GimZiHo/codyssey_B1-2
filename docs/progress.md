@@ -5,11 +5,11 @@
 ## 현재 상태
 
 - **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영.
-- **진행 중**: 정규 단계 08(최소 npm·Vite 환경 구성) 완료, 09(JavaScript 모듈) 설명 대기. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가했으며 자료 목록에 연결했다. 정규 작업은 기존 단계 순서로 이어간다.
-- **다음 작업**: [009 — 최소 npm·Vite 환경 구성](learning/009-minimal-vite-setup.md)에 이어 정규 단계 09 — JavaScript 모듈 설명을 진행한다. React 진입 파일에서 사용할 import/export의 역할을 학습자료로 작성하며 설치·소스 변경은 하지 않는다.
+- **진행 중**: 정규 단계 09(JavaScript 모듈) 설명 완료, 10(React 루트) 변경 대기. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가했으며 자료 목록에 연결했다. 정규 작업은 기존 단계 순서로 이어간다.
+- **다음 작업**: [010 — JavaScript 모듈](learning/010-javascript-modules.md)에 이어 정규 단계 10 — React 루트를 진행한다. React 18 이상과 DOM 연결에 필요한 패키지를 도입하고 현재 제목을 React 루트에서 표시한다. JSX·컴포넌트 분리·state는 함께 도입하지 않는다.
 - **진행 방식**: 대화 한 번에 아래 단계 하나를 진행한다. 다음 진행 요청에서 이어가고 질문이면 현재 단계에 머문다. 이미 다룬 개념을 별도로 기록하거나 조회하지 않는다.
 - **미정**: 데이터 모델 세부 사항·자료 본문 표시 및 이전 방식·원격 데이터 접근 권한. Supabase·Vercel 계정 및 프로젝트 연결 상태는 아직 확인하지 않았다.
-- **자료 반영 대기**: 없음. 최소 npm·Vite 환경 구성 학습자료와 자료 목록 링크를 반영했다.
+- **자료 반영 대기**: 없음. JavaScript 모듈 학습자료와 자료 목록 링크를 반영했다.
 - **Git**: main과 기존 커밋 이력은 유지한다. 환경 구성 변경은 삭제·복원 커밋으로 되돌린다. 기존 미추적 과제·지침 파일은 보존한다.
 - **검증 범위**: `npm run dev`로 띄운 Vite 개발 서버에서 기존 `index.html`의 HTTP 응답·탭 제목·언어·문자 인코딩·화면 제목 실제 표시·오류 없음·서버 종료의 7개 항목 통과, 실패 0건. 그 전에는 로컬 파일 직접 열기로 5개 항목을 확인했다. 이전 React 환경 검증은 현재 구현의 근거로 사용하지 않는다.
 - **마지막 갱신**: 2026-09-27
@@ -61,7 +61,7 @@
 | 06 | 완료 | 설명 | node_modules | 설치된 패키지 경로·버전 관리 제외 이유·재설치 흐름을 [학습자료](learning/007-node-modules-role.md)로 작성하고 목록에 연결했다. 자료와 목록의 로컬 링크 19건 통과, 실패 0건. 설치·설정 변경·실행 검증 없음. 기존 `.gitignore`의 `node_modules/` 설정은 유지하며 실제 설치 후 제외 적용과 `.bin` 연결 확인은 08 단계에 남겼다. 근거: [npm folders](https://docs.npmjs.com/cli/v11/configuring-npm/folders/), [npm ci](https://docs.npmjs.com/cli/v11/commands/npm-ci/). |
 | 07 | 완료 | 설명 | Vite | 선택한 개발·빌드 도구의 필요성·대안·기존 화면 실행 방식과의 차이를 [학습자료](learning/008-vite-role.md)로 작성하고 목록에 연결했다. 자료와 목록의 로컬 링크 21건 통과, 실패 0건. 설치·소스 변경·실행 검증 없음. 명령과 생성 파일은 미실행 예시로 구분했으며 실제 버전 호환성·패키지 생성 방법·실행 명령 구성은 08 단계에서 확인한다. 근거: [Vite 시작하기](https://vite.dev/guide/), [React 앱을 처음부터 만들기](https://react.dev/learn/build-a-react-app-from-scratch). |
 | 08 | 완료 | 변경 | 없음 | Node.js `v24.18.1`·npm `11.16.0`이 Vite 8.3.1 요구 범위를 충족함을 확인했다. `package.json`을 직접 작성(`private: true`, `scripts.dev: vite`, `name`·`version` 생략)하고 `npm install --save-dev vite`로 설치(15개, audit 0건)해 `package-lock.json`(lockfileVersion 3, 선택 의존성 포함 41항목)을 생성했다. 기존 `.gitignore`의 `node_modules/` 제외와 `.bin/vite` 연결 확인. `index.html` 변경 없음. `npm run dev` 개발 서버에서 HTTP 응답·제목·언어·인코딩·h1 계산 스타일과 박스·오류 없음·서버 종료 7건 통과, 실패 0건. React·빌드·설정 파일 미도입. [학습자료](learning/009-minimal-vite-setup.md) 작성·목록 연결. |
-| 09 | 대기 | 설명 | JavaScript 모듈 | React 진입 파일에서 사용할 import/export의 역할을 설명한다. |
+| 09 | 완료 | 설명 | JavaScript 모듈 | React 진입 파일에서 사용할 import/export, named/default export, 상대 경로·패키지 이름, 모듈 script와 Vite의 역할을 [학습자료](learning/010-javascript-modules.md)로 작성하고 목록에 연결했다. 자료와 목록의 로컬 링크 20건 통과, 실패 0건. 예시는 미실행으로 표시했고 설치·소스 변경·실행 검증 없음. 근거: [MDN 모듈](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), [Vite 기능](https://vite.dev/guide/features.html#npm-dependency-resolving-and-pre-bundling). |
 | 10 | 대기 | 변경 | React 루트 | React 18 이상과 DOM 연결에 필요한 패키지를 도입하고 현재 제목을 React 루트에서 표시한다. 아직 JSX·컴포넌트 분리·state를 함께 도입하지 않는다. |
 | 11 | 대기 | 설명 | Vite 설정 파일 | JSX 변환에 필요한 설정을 둘 위치와 기본 설정을 유지할 범위를 설명한다. |
 | 12 | 대기 | 설명 | Vite 플러그인 | 선택한 JSX 변환 구성에서 플러그인의 역할을 설명한다. 실제 필요 여부를 확인하고 불필요한 설정은 추가하지 않는다. |

@@ -14,3 +14,4 @@
 | 007 | node_modules는 로컬 설치한 패키지의 실제 파일을 두는 결과물 폴더다 | 설치 경로와 `.bin`, package.json·package-lock.json과의 역할 차이, Git 제외·커밋 대안 비교와 재설치 흐름(설명, 미구현) | [007-node-modules-role.md](007-node-modules-role.md) |
 | 008 | Vite는 개발 서버와 배포 빌드를 맡는 도구다 | `index.html` 직접 실행과의 차이, B1-1 방식 지속 가능 여부, 대안 비교와 Vite 선택 근거, 미실행 설치·scripts 예시와 08~13단계 순서(설명, 미구현) | [008-vite-role.md](008-vite-role.md) |
 | 009 | 최소 npm·Vite 환경으로 기존 HTML을 개발 서버에 띄운다 | 버전 확인, `package.json` 직접 작성과 `npm install --save-dev vite`, 생성·변경 파일, 설치 수와 잠금 파일 항목 차이, 대안 비교, `npm run dev` 실행·종료와 검증 결과 | [009-minimal-vite-setup.md](009-minimal-vite-setup.md) |
+| 010 | JavaScript 모듈은 export로 내보낸 기능을 다른 파일에서 import로 가져온다 | React 진입 파일에 필요한 import/export, named·default와 대응 import, 상대 경로·패키지 이름, `type="module"`, 일반 script·import map·CommonJS 대안 비교, Vite의 패키지 이름 해석(설명, 미구현) | [010-javascript-modules.md](010-javascript-modules.md) |
