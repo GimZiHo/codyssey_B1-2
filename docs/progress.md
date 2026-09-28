@@ -4,14 +4,14 @@
 
 ## 현재 상태
 
-- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영. 정규 단계 13(JSX) 구현·검증·검토·학습자료 반영. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가해 자료 목록에 연결.
+- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영. 정규 단계 13(JSX)·14(함수 컴포넌트) 구현·검증·검토·학습자료 반영. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가해 자료 목록에 연결.
 - **진행 중**: 없음. 정규 작업은 기존 단계 순서로 이어간다.
-- **다음 작업**: 정규 단계 14 — 현재 JSX 제목 표시를 함수 컴포넌트로 표현하고 src/pages에 홈 페이지 역할을 둔다. 상태·라우팅은 추가하지 않는다.
+- **다음 작업**: 정규 단계 15 — 제목 등 실제 표시 값을 prop으로 받는 컴포넌트를 src/components에 분리한다. 아직 구현하지 않았다.
 - **진행 방식**: 대화 한 번에 아래 단계 하나를 진행한다. 다음 진행 요청에서 이어가고 질문이면 현재 단계에 머문다. 이미 다룬 개념을 별도로 기록하거나 조회하지 않는다.
 - **미정**: 데이터 모델 세부 사항·자료 본문 표시 및 이전 방식·원격 데이터 접근 권한. Supabase·Vercel 계정 및 프로젝트 연결 상태는 아직 확인하지 않았다.
 - **자료 반영 대기**: 없음.
 - **Git**: main과 기존 커밋 이력은 유지한다. 환경 구성 변경은 삭제·복원 커밋으로 되돌린다. 기존 미추적 과제·지침 파일은 보존한다.
-- **검증 범위**: JSX 도입 후 Vite 개발 서버에서 HTML·변환된 `.jsx` 진입 모듈 HTTP 응답(automatic 런타임 import), 메타데이터, 루트 내부 제목의 계산 스타일·박스 크기, 새로고침, 콘솔·페이지·요청 오류 없음, 로컬 링크, 서버 종료 총 7건 통과, 실패 0건. 함수 컴포넌트·상태·라우팅·빌드·플러그인은 미검증.
+- **검증 범위**: 함수 컴포넌트 도입 후 Vite 개발 서버에서 HTML·변환된 `main.jsx`의 `HomePage.jsx` import와 두 모듈의 JSX 변환(automatic 런타임), 모듈 응답, 메타데이터, 루트 내부 단일 `h1`의 계산 스타일·박스 크기, 새로고침, 콘솔·페이지·요청 오류 없음, 로컬 링크, 서버 종료 총 8건 통과, 실패 0건. props·상태·라우팅·빌드·플러그인은 미검증.
 - **마지막 갱신**: 2026-09-28
 
 ## 서비스 주제와 자료 범위
@@ -26,7 +26,7 @@
 
 ## 기술 구성 — 2026-09-25 선택
 
-기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 `index.html`의 `#root`와 `src/main.jsx`에서 제목을 JSX로 React에 표시한다. JSX는 플러그인·설정 파일 없이 Vite 기본 변환(automatic 런타임)을 사용한다. `package.json`·`package-lock.json`에는 Vite `8.3.1`(devDependencies)과 React·react-dom `19.3.0`(dependencies)이 있다. 빌드 스크립트·Vite 설정·플러그인은 아직 도입하지 않았다. 계정 생성·원격 연동·배포는 수행하지 않았다.
+기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 `index.html`의 `#root`에 `src/main.jsx`가 `src/pages/HomePage.jsx`의 함수 컴포넌트(default export)를 import해 제목을 React로 표시한다. JSX는 플러그인·설정 파일 없이 Vite 기본 변환(automatic 런타임)을 사용한다. `package.json`·`package-lock.json`에는 Vite `8.3.1`(devDependencies)과 React·react-dom `19.3.0`(dependencies)이 있다. 빌드 스크립트·Vite 설정·플러그인은 아직 도입하지 않았다. 계정 생성·원격 연동·배포는 수행하지 않았다.
 
 | 역할 | 선택 | 선택 이유 |
 | --- | --- | --- |
@@ -66,7 +66,7 @@
 | 11 | 완료 | 설명 | Vite 설정 파일 | 설정 파일의 역할·위치, 설정 없음·CLI·설정 파일의 대안과 기본값 유지 범위를 [학습자료](learning/012-vite-config.md)로 작성하고 목록에 연결했다. 자료·목록 로컬 링크 22건 통과, 실패 0건. 설치·소스 및 설정 변경·실행 검증 없음. 설정 파일 로딩과 JSX 기본 변환의 실제 동작 확인은 13단계에 남겼다. 근거: [Vite 설정](https://vite.dev/config/), [Vite JSX 지원](https://vite.dev/guide/features.html#jsx). |
 | 12 | 완료 | 설명 | Vite 플러그인 | 기본 JSX 변환과 React 플러그인의 추가 역할·대안을 [학습자료](learning/013-vite-plugin.md)로 작성하고 목록에 연결했다. 자료·목록 로컬 링크 19건 통과, 실패 0건. 다음 단계는 Vite 기본 JSX 변환을 우선 사용하며 플러그인·설정 파일을 미리 추가하지 않는다. 실제 화면 동작은 13단계에서 확인한다. 설치·소스 및 설정 변경·실행 검증 없음. 근거: [Vite JSX 지원](https://vite.dev/guide/features.html#jsx), [Vite 공식 플러그인](https://vite.dev/plugins/). |
 | 13 | 완료 | 변경 | JSX | `src/main.js`를 삭제하고 `src/main.jsx`에서 `createRoot`를 유지한 채 `root.render(<h1>학습 기록 서비스</h1>)`로 바꿨으며 `index.html` 모듈 경로를 `/src/main.jsx`로 변경했다. 패키지·Vite 설정·플러그인 변경 없이 기본 변환 사용. 브라우저 검증 7건 통과, 실패 0건(HTTP·변환 모듈의 jsx-dev-runtime import·메타데이터·계산 스타일/박스·새로고침·오류 없음·로컬 링크 25건·서버 종료). [학습자료](learning/014-jsx.md)와 목록에 실제 변경·검증 결과 반영. 근거: [React JSX](https://react.dev/learn/writing-markup-with-jsx), [Vite JSX 지원](https://vite.dev/guide/features.html#jsx). |
-| 14 | 대기 | 변경 | 함수 컴포넌트 | 현재 화면을 함수 컴포넌트로 표현하고 src/pages에 홈 페이지 역할을 둔다. 상태·라우팅은 추가하지 않는다. |
+| 14 | 완료 | 변경 | 함수 컴포넌트 | `src/pages/HomePage.jsx`에 기존 `h1`을 반환하는 `HomePage`를 default export하고 `src/main.jsx`에서 import해 `root.render(<HomePage />)`로 바꿨다. `index.html`·패키지·Vite 설정 변경 없음, props·state·라우팅·App 미도입. 브라우저 검증 8건 통과, 실패 0건(HTTP·두 모듈 변환·모듈 응답·메타데이터·단일 h1 계산 스타일/박스·새로고침·오류 없음·로컬 링크·서버 종료). 첫 실행의 HTTP 실패 1건은 주석 문자열을 미변환 JSX로 오인한 검사 조건 오류로, 검사 수정 후 해당 항목 재실행 통과. [학습자료](learning/015-function-component.md)와 목록에 실제 변경·검증 결과 반영. 근거: [React 첫 컴포넌트](https://react.dev/learn/your-first-component), [컴포넌트 import/export](https://react.dev/learn/importing-and-exporting-components). |
 
 ### 2. 재사용과 화면 갱신
 
