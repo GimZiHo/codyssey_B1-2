@@ -4,14 +4,14 @@
 
 ## 현재 상태
 
-- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영. 정규 단계 13(JSX)·14(함수 컴포넌트)·15(props)·16(배열 렌더링)·17(key)·18(React 이벤트 처리)·19(state)·20(조건부 렌더링)·21(children) 구현·검증·검토·학습자료 반영. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가해 자료 목록에 연결.
+- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영. 정규 단계 13(JSX)·14(함수 컴포넌트)·15(props)·16(배열 렌더링)·17(key)·18(React 이벤트 처리)·19(state)·20(조건부 렌더링)·21(children)·22(CSS import) 구현·검증·검토·학습자료 반영. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가해 자료 목록에 연결.
 - **진행 중**: 없음. 정규 작업은 기존 단계 순서로 이어간다.
-- **다음 작업**: 정규 단계 22 — src/styles의 일반 CSS를 CSS import로 화면에 연결한다.
+- **다음 작업**: 정규 단계 23 — 클라이언트 라우팅의 역할을 학습자료로 설명한다.
 - **진행 방식**: 대화 한 번에 아래 단계 하나를 진행한다. 다음 진행 요청에서 이어가고 질문이면 현재 단계에 머문다. 이미 다룬 개념을 별도로 기록하거나 조회하지 않는다.
 - **미정**: 데이터 모델 세부 사항·자료 본문 표시 및 이전 방식·원격 데이터 접근 권한. Supabase·Vercel 계정 및 프로젝트 연결 상태는 아직 확인하지 않았다.
 - **자료 반영 대기**: 없음.
 - **Git**: main과 기존 커밋 이력은 유지한다. 환경 구성 변경은 삭제·복원 커밋으로 되돌린다. 기존 미추적 과제·지침 파일은 보존한다.
-- **검증 범위**: children 단계에서 render 11·state 5·reload 4·links 3 총 23항목 통과, 실패 0건. header·main 각 1개와 계산 스타일·박스, main 내부 페이지, 초기 2개·전체 3개·빈 안내·복구 2개, alert 3건, 새로고침과 오류 없음·서버 종료를 확인했다. 재검증 없음. HMR·문서 앵커 정확성·원격 연동은 미검증. 19단계 최초 render 오류의 원인은 미확정으로 남아 있다.
+- **검증 범위**: CSS import 단계에서 render 16·state 7·links 3 총 26항목 통과, 실패 0건. CSS 모듈 응답·style 주입·계산 스타일/박스, 초기 2개·전체 3개·빈 안내·복구 2개, alert 3건, 새로고침과 오류 없음·서버 종료를 확인했다. 소스 주석 보완은 동작 영향이 없어 브라우저 성공 근거를 재사용했다. 자료 보완 후 links 3항목 추가 통과. CSS HMR·프로덕션 빌드·문서 앵커 정확성·원격 연동은 미검증. 19단계 최초 render 오류의 원인은 미확정으로 남아 있다.
 - **마지막 갱신**: 2026-09-30
 
 ## 서비스 주제와 자료 범위
@@ -26,7 +26,7 @@
 
 ## 기술 구성 — 2026-09-25 선택
 
-기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 `src/main.jsx`가 `<Layout><HomePage /></Layout>`를 렌더링하고 `Layout`이 children을 main에 표시하며 `SiteHeader`를 공통 헤더로 둔다. `index.html`의 `#root`에 `src/main.jsx`가 `src/pages/HomePage.jsx`의 함수 컴포넌트(default export)를 import하고, HomePage는 `src/components/PageTitle.jsx`에 title prop을 전달해 제목을 React로 표시하며, HomePage의 정적 records 배열 3개를 map으로 목록 표시하고 고정 id를 li의 key로 지정한다. useState의 visibleCount(초기값 2)로 목록의 표시 개수를 관리하고 전체 보기·2개 보기·목록 비우기(0개) 버튼으로 전환한다. 표시할 기록이 0개이면 삼항 연산자로 ul 대신 안내 문구만 렌더링한다. 기록 수 확인 버튼은 표시 범위와 무관하게 전체 기록 수 3개를 alert로 표시한다. JSX는 플러그인·설정 파일 없이 Vite 기본 변환(automatic 런타임)을 사용한다. `package.json`·`package-lock.json`에는 Vite `8.3.1`(devDependencies)과 React·react-dom `19.3.0`(dependencies)이 있다. 빌드 스크립트·Vite 설정·플러그인은 아직 도입하지 않았다. 계정 생성·원격 연동·배포는 수행하지 않았다.
+기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 `src/main.jsx`가 `<Layout><HomePage /></Layout>`를 렌더링하고 `Layout`이 children을 main에 표시하며 `SiteHeader`를 공통 헤더로 둔다. `index.html`의 `#root`에 `src/main.jsx`가 `src/pages/HomePage.jsx`의 함수 컴포넌트(default export)를 import하고, HomePage는 `src/components/PageTitle.jsx`에 title prop을 전달해 제목을 React로 표시하며, HomePage의 정적 records 배열 3개를 map으로 목록 표시하고 고정 id를 li의 key로 지정한다. useState의 visibleCount(초기값 2)로 목록의 표시 개수를 관리하고 전체 보기·2개 보기·목록 비우기(0개) 버튼으로 전환한다. 표시할 기록이 0개이면 삼항 연산자로 ul 대신 안내 문구만 렌더링한다. 기록 수 확인 버튼은 표시 범위와 무관하게 전체 기록 수 3개를 alert로 표시한다. `src/main.jsx`에서 `src/styles/global.css`를 import하여 body·header·main·button에 일반 CSS를 적용한다. JSX는 플러그인·설정 파일 없이 Vite 기본 변환(automatic 런타임)을 사용한다. `package.json`·`package-lock.json`에는 Vite `8.3.1`(devDependencies)과 React·react-dom `19.3.0`(dependencies)이 있다. 빌드 스크립트·Vite 설정·플러그인은 아직 도입하지 않았다. 계정 생성·원격 연동·배포는 수행하지 않았다.
 
 | 역할 | 선택 | 선택 이유 |
 | --- | --- | --- |
@@ -79,7 +79,7 @@
 | 19 | 완료 | 변경 | state | HomePage에 visibleCount 숫자 상태(초기 2), 전체 보기·2개 보기 고정 버튼과 slice 기반 목록을 추가했다. 이벤트 → 상태 변경 → 렌더링·키보드·반복·새로고침·실제 표시 등 실질 21항목 현재 통과. 최초 render 훅 오류는 재실행 및 강제 재최적화에서 재현되지 않아 원인 미확정으로 기록했다. state·links 성공 근거 재사용. [학습자료](learning/020-state.md)와 목록에 실제 변경·검증 반영. |
 | 20 | 완료 | 변경 | 조건부 렌더링 | HomePage에 목록 비우기 버튼(`setVisibleCount(0)`)을 추가하고 `visibleRecords.length === 0` 삼항 연산자로 안내 p와 ul을 상호배타로 렌더링했다. 초기 2·전체/2개·alert 3개 유지. 빈 안내 계산 스타일/박스·ul/li DOM 부재·복원 반복·키보드·alert·새로고침·링크·서버 종료 33항목 통과, 실패 0건. 자료 보완 후 links만 재실행. [학습자료](learning/021-conditional-rendering.md)와 목록에 실제 변경·검증 반영. HMR·앵커 정확성 미검증. 근거: [React 조건부 렌더링](https://react.dev/learn/conditional-rendering). |
 | 21 | 완료 | 변경 | children | `Layout.jsx`가 children을 main에 표시하고 `SiteHeader.jsx`를 공통 헤더로 구성했다. `main.jsx`에서 HomePage를 Layout으로 감쌌으며 기존 페이지·패키지 변경 없이 CSS·라우팅은 미도입. 구조·실제 표시/박스·목록 전환·alert·새로고침·오류 없음·링크·서버 종료 23항목 통과, 실패 0건. [학습자료](learning/022-children.md)와 목록에 실제 변경·검증 반영. 근거: [React children](https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children). |
-| 22 | 대기 | 변경 | CSS import | src/styles의 일반 CSS를 화면에 연결하고 기존 HTML의 스타일시트 연결과 차이를 확인한다. |
+| 22 | 완료 | 변경 | CSS import | `src/styles/global.css`를 `main.jsx`에서 import하여 최소 전역 스타일을 적용했다. 기존 컴포넌트·상태·이벤트 유지. CSS 모듈 응답·개발 서버 style 주입·계산 스타일/박스·목록 전환·alert·새로고침·오류 없음·링크·서버 종료 26항목 통과, 실패 0건. 자료 보완 후 links 3항목 추가 통과. [학습자료](learning/023-css-import.md)와 목록에 실제 변경·검증 반영. CSS HMR·프로덕션 빌드는 미검증. 근거: [Vite CSS](https://vite.dev/guide/features.html#css). |
 
 ### 3. 페이지 이동
 
