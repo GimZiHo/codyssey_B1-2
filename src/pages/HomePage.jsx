@@ -29,20 +29,34 @@ export default function HomePage() {
     setVisibleCount(2);
   }
 
+  // 기록 삭제가 아니라 표시 개수만 0으로 바꾼다(원본 records는 그대로).
+  function handleClear() {
+    setVisibleCount(0);
+  }
+
+  // 배열 렌더링: slice로 앞에서 visibleCount개만 고른 새 배열(원본 records는 그대로).
+  const visibleRecords = records.slice(0, visibleCount);
+
   // title prop: 표시할 제목은 부모인 HomePage가 정해 PageTitle에 전달한다.
-  // 배열 렌더링: slice로 앞에서 visibleCount개만 고른 새 배열을 map으로 li로 바꾼다(원본 records는 그대로).
+  // 조건부 렌더링: 삼항 연산자로 안내와 목록 중 정확히 하나만 그린다(빈 ul은 DOM에 남지 않음).
+  // 조건은 비교식으로 쓴다. `visibleCount && ...`는 0일 때 숫자 0을 그린다.
   // key: 다시 렌더링할 때 React가 같은 기록의 li를 짝지어 재사용하게 하는 표시.
   return (
     <div>
       <PageTitle title="학습 기록 서비스" />
       <p>{records.length}개 중 {visibleCount}개 표시</p>
-      <ul>
-        {records.slice(0, visibleCount).map((record) => (
-          <li key={record.id}>{record.title} ({record.project})</li>
-        ))}
-      </ul>
+      {visibleRecords.length === 0 ? (
+        <p>표시할 학습 기록이 없습니다.</p>
+      ) : (
+        <ul>
+          {visibleRecords.map((record) => (
+            <li key={record.id}>{record.title} ({record.project})</li>
+          ))}
+        </ul>
+      )}
       <button type="button" onClick={handleShowAll}>전체 보기</button>
       <button type="button" onClick={handleShowTwo}>2개 보기</button>
+      <button type="button" onClick={handleClear}>목록 비우기</button>
       {/* onClick에는 호출 결과가 아닌 함수 자체를 전달한다(괄호 없음). */}
       <button type="button" onClick={handleCheckRecordCount}>기록 수 확인</button>
     </div>
