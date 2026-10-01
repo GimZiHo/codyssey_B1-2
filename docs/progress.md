@@ -4,14 +4,14 @@
 
 ## 현재 상태
 
-- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영. 정규 단계 23(클라이언트 라우팅) 설명·학습자료 반영 완료. 정규 단계 13(JSX)·14(함수 컴포넌트)·15(props)·16(배열 렌더링)·17(key)·18(React 이벤트 처리)·19(state)·20(조건부 렌더링)·21(children)·22(CSS import) 구현·검증·검토·학습자료 반영. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가해 자료 목록에 연결.
+- **완료**: 기존 과제 분석 확인, 운영 지침·학습자료 작성 기준·공통 도구 정보 이관. 서비스 주제를 학습 기록으로 결정하고 자료 범위를 B1-1·B1-2로 확정. 백엔드·개발 및 배포 도구 선택(아래 기술 구성 참고). Git 저장소 초기화. 단일 `index.html` 기본 화면 구현·브라우저 검증·학습자료 반영. 최소 npm·Vite 환경 구성과 개발 서버 표시 검증·학습자료 반영. 정규 단계 23(클라이언트 라우팅) 설명·학습자료 반영 완료. 정규 단계 24(라우트 매핑) 구현·검증·검토·학습자료 반영 완료. 정규 단계 13(JSX)·14(함수 컴포넌트)·15(props)·16(배열 렌더링)·17(key)·18(React 이벤트 처리)·19(state)·20(조건부 렌더링)·21(children)·22(CSS import) 구현·검증·검토·학습자료 반영. 사용자가 외부 대화로 작성한 웹 기초 배경지식 자료를 `000-browser-web-basics.md`로 추가해 자료 목록에 연결.
 - **진행 중**: 없음. 정규 작업은 기존 단계 순서로 이어간다.
-- **다음 작업**: 정규 단계 24 — React Router Declarative 구성을 도입하고 5개 페이지 경로의 매핑·직접 접근 표시를 확인한다.
+- **다음 작업**: 정규 단계 25 — 공통 헤더에 페이지 이동 링크를 추가하고 주소와 화면 변경을 확인한다.
 - **진행 방식**: 대화 한 번에 아래 단계 하나를 진행한다. 다음 진행 요청에서 이어가고 질문이면 현재 단계에 머문다. 이미 다룬 개념을 별도로 기록하거나 조회하지 않는다.
 - **미정**: 데이터 모델 세부 사항·자료 본문 표시 및 이전 방식·원격 데이터 접근 권한. Supabase·Vercel 계정 및 프로젝트 연결 상태는 아직 확인하지 않았다.
 - **자료 반영 대기**: 없음.
 - **Git**: main과 기존 커밋 이력은 유지한다. 환경 구성 변경은 삭제·복원 커밋으로 되돌린다. 기존 미추적 과제·지침 파일은 보존한다.
-- **검증 범위**: CSS import 단계에서 render 16·state 7·links 3 총 26항목 통과, 실패 0건. CSS 모듈 응답·style 주입·계산 스타일/박스, 초기 2개·전체 3개·빈 안내·복구 2개, alert 3건, 새로고침과 오류 없음·서버 종료를 확인했다. 소스 주석 보완은 동작 영향이 없어 브라우저 성공 근거를 재사용했다. 자료 보완 후 links 3항목 추가 통과. CSS HMR·프로덕션 빌드·문서 앵커 정확성·원격 연동은 미검증. 19단계 최초 render 오류의 원인은 미확정으로 남아 있다.
+- **검증 범위**: 24단계 routes 21·home 7·links 2·서버 시작/종료 2 총 32항목 통과, 실패 0건. 5개 URL 직접 접근·새로고침·공통 구조·계산 스타일/박스·오류 없음, 등록 경로 선택, 홈 목록 2→3→0→2와 기록 수 3개 alert 1건을 확인했다. 자료 보완 후 links 2항목 추가 통과. 소스 변경이 없어 브라우저 성공 근거 재사용. HMR·프로덕션 빌드·문서 앵커 정확성·원격 연동·라우트 선언 순서 변경은 미검증. 19단계 최초 render 오류의 원인은 미확정으로 남아 있다.
 - **마지막 갱신**: 2026-10-01
 
 ## 서비스 주제와 자료 범위
@@ -26,7 +26,7 @@
 
 ## 기술 구성 — 2026-09-25 선택
 
-기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 `src/main.jsx`가 `<Layout><HomePage /></Layout>`를 렌더링하고 `Layout`이 children을 main에 표시하며 `SiteHeader`를 공통 헤더로 둔다. `index.html`의 `#root`에 `src/main.jsx`가 `src/pages/HomePage.jsx`의 함수 컴포넌트(default export)를 import하고, HomePage는 `src/components/PageTitle.jsx`에 title prop을 전달해 제목을 React로 표시하며, HomePage의 정적 records 배열 3개를 map으로 목록 표시하고 고정 id를 li의 key로 지정한다. useState의 visibleCount(초기값 2)로 목록의 표시 개수를 관리하고 전체 보기·2개 보기·목록 비우기(0개) 버튼으로 전환한다. 표시할 기록이 0개이면 삼항 연산자로 ul 대신 안내 문구만 렌더링한다. 기록 수 확인 버튼은 표시 범위와 무관하게 전체 기록 수 3개를 alert로 표시한다. `src/main.jsx`에서 `src/styles/global.css`를 import하여 body·header·main·button에 일반 CSS를 적용한다. JSX는 플러그인·설정 파일 없이 Vite 기본 변환(automatic 런타임)을 사용한다. `package.json`·`package-lock.json`에는 Vite `8.3.1`(devDependencies)과 React·react-dom `19.3.0`(dependencies)이 있다. 빌드 스크립트·Vite 설정·플러그인은 아직 도입하지 않았다. 계정 생성·원격 연동·배포는 수행하지 않았다.
+기술 선택은 유지하되 일괄 환경 구성은 사용자 요청으로 되돌렸다. 현재는 `src/main.jsx`가 BrowserRouter 안에서 Layout과 Routes·Route로 홈(`/`)·목록(`/records`)·등록(`/records/new`)·상세(`/records/:recordId`)·수정(`/records/:recordId/edit`)을 매핑하고 `Layout`이 children을 main에 표시하며 `SiteHeader`를 공통 헤더로 둔다. `index.html`의 `#root`에 `src/main.jsx`가 `src/pages/HomePage.jsx`의 함수 컴포넌트(default export)를 import하고, HomePage는 `src/components/PageTitle.jsx`에 title prop을 전달해 제목을 React로 표시하며, HomePage의 정적 records 배열 3개를 map으로 목록 표시하고 고정 id를 li의 key로 지정한다. useState의 visibleCount(초기값 2)로 목록의 표시 개수를 관리하고 전체 보기·2개 보기·목록 비우기(0개) 버튼으로 전환한다. 표시할 기록이 0개이면 삼항 연산자로 ul 대신 안내 문구만 렌더링한다. 기록 수 확인 버튼은 표시 범위와 무관하게 전체 기록 수 3개를 alert로 표시한다. `src/main.jsx`에서 `src/styles/global.css`를 import하여 body·header·main·button에 일반 CSS를 적용한다. JSX는 플러그인·설정 파일 없이 Vite 기본 변환(automatic 런타임)을 사용한다. `package.json`·`package-lock.json`에는 Vite `8.3.1`(devDependencies)과 React·react-dom `19.3.0`, React Router `8.4.0`(dependencies)이 있다. React Router는 Node.js `>=22.22.0`, React·react-dom `>=19.2.7`을 요구하며 현재 환경이 충족한다. 추가 4페이지는 제목·안내만 표시하며 식별자 읽기·링크·Not Found는 후속 단계다. 빌드 스크립트·Vite 설정·플러그인은 아직 도입하지 않았다. 계정 생성·원격 연동·배포는 수행하지 않았다.
 
 | 역할 | 선택 | 선택 이유 |
 | --- | --- | --- |
@@ -86,7 +86,7 @@
 | 단계 | 상태 | 구분 | 새 핵심 개념 | 수행 범위·완료 기준 |
 | --- | --- | --- | --- | --- |
 | 23 | 완료 | 설명 | 클라이언트 라우팅 | URL과 화면의 관계·현재 고정 렌더링 방식·대안과 React Router Declarative 선택 근거를 [학습자료](learning/024-client-routing.md)로 작성하고 목록에 연결했다. History API·Vite SPA fallback·배포 rewrite의 공식 근거를 확인했다. 자료·목록 로컬 링크 대상 38건 통과, 실패 0건. 공식 근거 보완 후 links만 재실행했으며 기존 결과는 보존했다. 설치·소스 변경·실행 검증 없음. 예시는 미실행으로 구분했다. React Router 설치 버전·호환성 및 개발 서버의 실제 직접 접근·새로고침 검증은 24단계에 남겼다. |
-| 24 | 대기 | 변경 | 라우트 매핑 | React Router Declarative 구성을 도입한다. 홈·목록·상세·등록·수정의 5개 페이지 경로를 매핑하고 각각 직접 접근해 표시를 확인한다. 페이지 본문은 최소 내용만 둔다. |
+| 24 | 완료 | 변경 | 라우트 매핑 | React Router `8.4.0`을 설치하고 `main.jsx`의 BrowserRouter·Routes·Route로 5개 경로를 매핑했다. 추가 4페이지는 PageTitle·안내만 표시하며 기존 홈·Layout·CSS 유지. 직접 접근·새로고침·실제 표시/스타일/박스·등록 경로 선택·홈 상태/alert·오류 없음·링크·서버 종료 32항목 통과, 실패 0건. 자료 보완 후 links 2항목 추가 통과. [학습자료](learning/025-route-mapping.md)와 목록에 실제 변경·검증 반영. Link·useParams·Not Found·원격·빌드는 미도입. |
 | 25 | 대기 | 변경 | 내비게이션 링크 | 공통 헤더에서 페이지로 이동하는 링크를 추가하고 주소와 화면 변경을 확인한다. |
 | 26 | 대기 | 변경 | 라우트 파라미터 | 상세 경로의 식별자로 정적 기록을 선택해 표시한다. 목록에서 상세로 이동하는 경로를 확인한다. |
 | 27 | 대기 | 변경 | Not Found | 잘못된 주소에 전용 페이지를 표시한다. 존재하지 않는 기록은 조회 단계에서 별도로 처리한다. |
