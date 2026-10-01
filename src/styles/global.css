@@ -17,6 +17,10 @@ header p {
   font-weight: bold;
 }
 
+header nav a {
+  margin-right: 16px;
+}
+
 main {
   max-width: 720px;
   padding: 0 24px 24px;
