@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import PageTitle from '../components/PageTitle.jsx';
-
-// 정적 예시 배열: 원격 조회 전까지 쓰는 학습 기록. 배열 순서가 곧 화면 순서다.
-// id: 기록마다 고정된 고유 식별값. 위치(index)가 아닌 데이터로 항목을 구분한다.
-const records = [
-  { id: 'jsx', title: 'JSX', project: 'B1-2' },
-  { id: 'function-component', title: '함수 컴포넌트', project: 'B1-2' },
-  { id: 'props', title: 'props', project: 'B1-2' },
-];
+// 정적 기록은 목록·상세와 공유하도록 src/lib로 옮겼다. 홈에서는 기존 이름 records로 쓴다.
+import { staticRecords as records } from '../lib/staticRecords.js';
 
 // 함수 컴포넌트: JSX를 반환하는 대문자 이름의 함수. 홈 페이지 화면을 맡는다.
 export default function HomePage() {
